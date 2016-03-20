@@ -13,21 +13,8 @@ module.exports = Backbone.View.extend({
   templateFail: _.template(tmpl.loginFail),
   initialize: function () {
     this.$el.append(this.render());
-    // this.fetch({
-    //         success: this.fetchSuccess,
-    //         error: this.fetchError
-    //     });
-
-
   },
-  // fetchSuccess: function (collection, response) {
-  //       console.log('Collection fetch success', response);
-  //       console.log('Collection models: ', this.models);
-  //   },
-  //
-  // fetchError: function (collection, response) {
-  //       throw new Error("Incorrect Login Credentials");
-  //   },
+
   render: function () {
     var markup = this.template;
     this.$el.html(markup);
@@ -53,7 +40,7 @@ module.exports = Backbone.View.extend({
       }
     });
     console.log("newUserModel", newUserModel)
-    this.listenTo(this.collection, 'add', this.addAll);
+    // this.listenTo(this.collection, 'add', this.addAll);
   },
 
   logIn: function(evt){
@@ -79,9 +66,6 @@ module.exports = Backbone.View.extend({
       },
   })
   },
-
-
-
   logOut: function(evt){
     evt.preventDefault();
     var markup = this.template;
@@ -142,7 +126,19 @@ module.exports = Backbone.Collection.extend({
   initialize: function(){
     console.log('message collection initted');
 
-  }
+  },
+
+  // parse: function (data) {
+  //   var that = this;
+  //   window.glob3= data;
+  //   return _.map(data.photos.photo, function (el) {
+  //
+  //     return { photoUrl: that.buildImgUrl(el),
+  //              title: el.title,
+  //              dtUpload: el.dateupload
+  //            };
+  //   });
+  // },
 
 });
 
@@ -154,20 +150,26 @@ var $ =require('jquery');
 var messageModelView = require('./messageModelView');
 
 module.exports = Backbone.View.extend({
-  el: '.messagesAppend',
+  el: '.sendMsgBody',
   template: _.template(tmpl.gamePage),
   templateMsg: _.template(tmpl.message),
   initialize: function(){
     console.log('message collection view initted');
     this.addAll();
+    this.render();
+  },
+  render: function(){
+    var markup = this.templateMsg;
+    this.$el.html(markup);
+    return this;
   },
   addOne: function(el){
-    
+    var modelView = new messageModelView({model: el});
+    this.$el.append(modelView.render().el);
   },
   addAll: function(){
     this.$el.html('');
-    console.log(this.collection);
-    window.glob1 = this.collection;
+    window.glob1 = this.collection.models;
     _.each(this.collection.models, this.addOne, this);
   },
   render: function(){
@@ -206,7 +208,6 @@ module.exports = Backbone.View.extend({
   },
   addOne: function(){
     var markup = this.template(this.model.toJSON());
-    window.globby = markup;
     this.$el.html(markup);
     return this;
   },
@@ -219,6 +220,7 @@ var tmpl = require('./templates');
 var _ = require('underscore');
 var $ = require('jquery');
 var messageModel = require('./messageModel');
+
 
 module.exports = Backbone.View.extend({
   el: '.sendMsgBody',
@@ -252,6 +254,7 @@ module.exports = Backbone.View.extend({
   this.$el.find('input').val('');
   newMsgModel.save();
   this.listenTo(this.collection, 'add', this.addAll);
+
 },
 
 goBack: function(evt){
@@ -310,9 +313,9 @@ templates.loginFail =[
 
   templates.message= [
     `<div class="message panel-body">
-      <h5>Sender</h5>
-      <p>Hint</p>
-      <p>Scramble</p>
+      <h5></h5>
+      <p></p>
+      <p></p>
       <div class="btn-group msgBtns">
         <button type="button" class="btn btn-default play" name="play"><span class="glyphicon glyphicon-play"></span></button>
         <button type="button" class="btn btn-default" name="destroy"><span class="glyphicon glyphicon-trash"></span></button>

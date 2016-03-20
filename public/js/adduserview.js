@@ -12,21 +12,8 @@ module.exports = Backbone.View.extend({
   templateFail: _.template(tmpl.loginFail),
   initialize: function () {
     this.$el.append(this.render());
-    // this.fetch({
-    //         success: this.fetchSuccess,
-    //         error: this.fetchError
-    //     });
-
-
   },
-  // fetchSuccess: function (collection, response) {
-  //       console.log('Collection fetch success', response);
-  //       console.log('Collection models: ', this.models);
-  //   },
-  //
-  // fetchError: function (collection, response) {
-  //       throw new Error("Incorrect Login Credentials");
-  //   },
+
   render: function () {
     var markup = this.template;
     this.$el.html(markup);
@@ -52,7 +39,7 @@ module.exports = Backbone.View.extend({
       }
     });
     console.log("newUserModel", newUserModel)
-    this.listenTo(this.collection, 'add', this.addAll);
+    // this.listenTo(this.collection, 'add', this.addAll);
   },
 
   logIn: function(evt){
@@ -78,9 +65,6 @@ module.exports = Backbone.View.extend({
       },
   })
   },
-
-
-
   logOut: function(evt){
     evt.preventDefault();
     var markup = this.template;

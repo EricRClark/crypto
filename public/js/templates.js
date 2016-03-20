@@ -40,9 +40,9 @@ templates.loginFail =[
 
   templates.message= [
     `<div class="message panel-body">
-      <h5>Sender</h5>
-      <p>Hint</p>
-      <p>Scramble</p>
+      <h5></h5>
+      <p></p>
+      <p></p>
       <div class="btn-group msgBtns">
         <button type="button" class="btn btn-default play" name="play"><span class="glyphicon glyphicon-play"></span></button>
         <button type="button" class="btn btn-default" name="destroy"><span class="glyphicon glyphicon-trash"></span></button>

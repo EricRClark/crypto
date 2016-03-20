@@ -4,6 +4,7 @@ var _ = require('underscore');
 var $ = require('jquery');
 var messageModel = require('./messageModel');
 
+
 module.exports = Backbone.View.extend({
   el: '.sendMsgBody',
   template: _.template(tmpl.sendMsgForm),
@@ -36,6 +37,7 @@ module.exports = Backbone.View.extend({
   this.$el.find('input').val('');
   newMsgModel.save();
   this.listenTo(this.collection, 'add', this.addAll);
+
 },
 
 goBack: function(evt){
