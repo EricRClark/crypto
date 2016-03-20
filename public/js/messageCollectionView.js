@@ -10,6 +10,7 @@ module.exports = Backbone.View.extend({
     console.log('message collection view initted');
     this.addAll();
   },
+
   addOne: function(el){
     var modelView = new messageModelView({model: el});
     console.log(modelView);
