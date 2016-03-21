@@ -3,6 +3,8 @@ var tmpl = require('./templates');
 var _ = require('underscore');
 var $ =require('jquery');
 var messageModelView = require('./messageModelView');
+var messageCollection = require('./messageCollection');
+
 
 module.exports = Backbone.View.extend({
   el: '.sendMsgBody',
